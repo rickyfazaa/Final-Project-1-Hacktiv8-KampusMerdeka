@@ -8,7 +8,7 @@ Pembagian Tugas
 
 GLNG-KS04-017_Alrico Rizki Wibowo = Method GetAll dan Update
 
-GLNG-KS04-022_Ricky Khairul Faze = Swagger dan Method GetById
+GLNG-KS04-022_Ricky Khairul Faza = Swagger dan Method GetById
 
 GLNG-KS04-024_Muhammad Rafid = Method Create dan Delete
  
