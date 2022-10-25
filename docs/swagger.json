@@ -1,0 +1,266 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server celler server.",
+        "title": "Project 1 Kampus Merdeka X Hacktiv8 ToDos",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "paths": {
+        "/todos": {
+            "get": {
+                "description": "Get All Todos",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Get All Data Todos",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.SuccessGet"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Post New Data Todos",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Post New Data Todos",
+                "parameters": [
+                    {
+                        "description": "Todos",
+                        "name": "todo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/todos.CreateTodo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.SuccessCreate"
+                        }
+                    }
+                }
+            }
+        },
+        "/todos/{id}": {
+            "get": {
+                "description": "Get Todos By ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Get Todos By ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID Todo",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.SuccessGet"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Edit Data Todos",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Put Edit Data Todos",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID Todo",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update",
+                        "name": "todo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/todos.CreateTodo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.SuccessUpdate"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete Data Todos",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Delete Data Todos",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID Todo",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.SuccessDelete"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "response.SuccessCreate": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/todos.Todo"
+                },
+                "messages": {
+                    "type": "string",
+                    "example": "Success add new todos"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                }
+            }
+        },
+        "response.SuccessDelete": {
+            "type": "object",
+            "properties": {
+                "messages": {
+                    "type": "string",
+                    "example": "Success delete todos with id 2"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                }
+            }
+        },
+        "response.SuccessGet": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "todos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/todos.Todo"
+                    }
+                }
+            }
+        },
+        "response.SuccessUpdate": {
+            "type": "object",
+            "properties": {
+                "messages": {
+                    "type": "string",
+                    "example": "Success update todos with id 2"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "success"
+                }
+            }
+        },
+        "todos.CreateTodo": {
+            "type": "object",
+            "properties": {
+                "complete": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Makan"
+                }
+            }
+        },
+        "todos.Todo": {
+            "type": "object",
+            "properties": {
+                "complete": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Makan"
+                }
+            }
+        }
+    }
+}

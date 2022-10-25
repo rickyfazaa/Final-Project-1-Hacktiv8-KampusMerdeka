@@ -1,0 +1,179 @@
+basePath: /
+definitions:
+  response.SuccessCreate:
+    properties:
+      data:
+        $ref: '#/definitions/todos.Todo'
+      messages:
+        example: Success add new todos
+        type: string
+      status:
+        example: success
+        type: string
+    type: object
+  response.SuccessDelete:
+    properties:
+      messages:
+        example: Success delete todos with id 2
+        type: string
+      status:
+        example: success
+        type: string
+    type: object
+  response.SuccessGet:
+    properties:
+      status:
+        example: success
+        type: string
+      todos:
+        items:
+          $ref: '#/definitions/todos.Todo'
+        type: array
+    type: object
+  response.SuccessUpdate:
+    properties:
+      messages:
+        example: Success update todos with id 2
+        type: string
+      status:
+        example: success
+        type: string
+    type: object
+  todos.CreateTodo:
+    properties:
+      complete:
+        example: false
+        type: boolean
+      name:
+        example: Makan
+        type: string
+    type: object
+  todos.Todo:
+    properties:
+      complete:
+        example: false
+        type: boolean
+      id:
+        example: 1
+        type: integer
+      name:
+        example: Makan
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Project 1 Kampus Merdeka X Hacktiv8 ToDos
+  version: "1.0"
+paths:
+  /todos:
+    get:
+      consumes:
+      - application/json
+      description: Get All Todos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessGet'
+      summary: Get All Data Todos
+      tags:
+      - Todo
+    post:
+      consumes:
+      - application/json
+      description: Post New Data Todos
+      parameters:
+      - description: Todos
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/todos.CreateTodo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessCreate'
+      summary: Post New Data Todos
+      tags:
+      - Todo
+  /todos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Data Todos
+      parameters:
+      - description: ID Todo
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessDelete'
+      summary: Delete Data Todos
+      tags:
+      - Todo
+    get:
+      consumes:
+      - application/json
+      description: Get Todos By ID
+      parameters:
+      - description: ID Todo
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessGet'
+      summary: Get Todos By ID
+      tags:
+      - Todo
+    put:
+      consumes:
+      - application/json
+      description: Edit Data Todos
+      parameters:
+      - description: ID Todo
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/todos.CreateTodo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessUpdate'
+      summary: Put Edit Data Todos
+      tags:
+      - Todo
+swagger: "2.0"
